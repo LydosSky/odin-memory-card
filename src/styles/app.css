@@ -1,0 +1,10 @@
+#root {
+  height: 100vh;
+}
+
+.main-container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 10fr;
+  padding: 1rem;
+}
