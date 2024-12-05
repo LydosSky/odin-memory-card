@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import fetcher from './utils/fetcher';
+import data from './utils/mockData';
+import Cards from './components/Cards';
+import GameDisplay from './components/GameDisplay';
 
 /**
  * App
@@ -9,24 +12,34 @@ import fetcher from './utils/fetcher';
  * */
 function App() {
   const URI = 'https://deckofcardsapi.com/api/deck/';
-  const [decks, setDecks] = useState({});
-  const [cards, setCards] = useState({});
+  const [decks, setDecks] = useState(data.deck_id);
+  const [cards, setCards] = useState(data.cards.slice(0, 12));
   const [numberOfCards, setNumberOfCards] = useState(12);
 
-  useEffect(function () {
-    fetcher(`${URI}/new/shuffle/?deck_count=1`).then((deck) => setDecks(deck));
-  }, []);
+  // useEffect(function () {
+  //   fetcher(`${URI}/new/shuffle/?deck_count=1`).then((deck) => setDecks(deck));
+  // }, []);
 
-  useEffect(
-    function () {
-      fetcher(`${URI}/${decks.deck_id}/draw/?count=${numberOfCards}`).then(
-        (cards) => setCards(cards),
-      );
-    },
-    [decks, numberOfCards],
+  // useEffect(
+  //   function () {
+  //     fetcher(`${URI}/${decks.deck_id}/draw/?count=${numberOfCards}`).then(
+  //       (cards) => setCards(cards),
+  //     );
+  //   },
+  //   [decks, numberOfCards],
+  // );
+
+  return (
+    <>
+      <div className="main-container">
+        <GameDisplay
+          numberOfCards={numberOfCards}
+          setNumberOfCards={setNumberOfCards}
+        />
+        <Cards cards={cards} />
+      </div>
+    </>
   );
-
-  return <h1 style={{ fontSize: '72px' }}>Hello World</h1>;
 }
 
 export default App;
