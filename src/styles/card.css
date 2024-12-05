@@ -1,0 +1,8 @@
+.card {
+  /* HACK original size of images */
+  width: 226px;
+  height: 314px;
+  /* -------------------------- */
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.7rem;
+}
