@@ -1,9 +1,17 @@
 import '../styles/card.css';
 
-export default function Card({ card }) {
+export default function Card({ card, clickHandler }) {
   return (
-    <div className="card">
-      <img src={card.images.svg} />
-    </div>
+    <div
+      className="card"
+      style={{
+        backgroundImage: `url(${card.images.png})`,
+        background: '#555fff',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      onClick={clickHandler}
+    ></div>
   );
 }
