@@ -16,7 +16,7 @@ function App() {
   const [decks, setDecks] = useState(data.deck_id);
   const [numberOfCards, setNumberOfCards] = useState(12);
   const [cards, setCards] = useState(data.cards.slice(0, 12));
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState([]);
   const [highestScore, setHighestScore] = useState(0);
 
   // useEffect(function () {
@@ -41,7 +41,13 @@ function App() {
           numberOfCards={numberOfCards}
           setNumberOfCards={setNumberOfCards}
         />
-        <Cards cards={cards} numberOfCards={numberOfCards} />
+        <Cards
+          score={score}
+          setScore={setScore}
+          cards={cards}
+          setCards={setCards}
+          numberOfCards={numberOfCards}
+        />
       </div>
     </>
   );

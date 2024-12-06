@@ -14,7 +14,7 @@ export default function GameDisplay({
   return (
     <div className="display-container">
       <div className="score-display">
-        <p>Your Score: {score}</p>
+        <p>Your Score: {score.length}</p>
         <p>Highest Score: {highestScore}</p>
       </div>
       <div className="cards-control">
