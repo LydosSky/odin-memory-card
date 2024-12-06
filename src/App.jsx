@@ -3,6 +3,7 @@ import fetcher from './utils/fetcher';
 import data from './utils/mockData';
 import Cards from './components/Cards';
 import GameDisplay from './components/GameDisplay';
+import './styles/app.css';
 
 /**
  * App
@@ -13,8 +14,10 @@ import GameDisplay from './components/GameDisplay';
 function App() {
   const URI = 'https://deckofcardsapi.com/api/deck/';
   const [decks, setDecks] = useState(data.deck_id);
-  const [cards, setCards] = useState(data.cards.slice(0, 12));
   const [numberOfCards, setNumberOfCards] = useState(12);
+  const [cards, setCards] = useState(data.cards.slice(0, 12));
+  const [score, setScore] = useState(0);
+  const [highestScore, setHighestScore] = useState(0);
 
   // useEffect(function () {
   //   fetcher(`${URI}/new/shuffle/?deck_count=1`).then((deck) => setDecks(deck));
@@ -33,10 +36,12 @@ function App() {
     <>
       <div className="main-container">
         <GameDisplay
+          score={score}
+          highestScore={highestScore}
           numberOfCards={numberOfCards}
           setNumberOfCards={setNumberOfCards}
         />
-        <Cards cards={cards} />
+        <Cards cards={cards} numberOfCards={numberOfCards} />
       </div>
     </>
   );
