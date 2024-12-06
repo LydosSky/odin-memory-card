@@ -4,13 +4,19 @@ import '../styles/cards.css';
 
 export default function Cards({
   setScore,
+  setHighestScore,
   score,
   cards,
   setCards,
   numberOfCards,
 }) {
   const clickHandler = function (cardCode) {
-    if (!score.includes(cardCode)) setScore([...score, cardCode]);
+    if (!score.includes(cardCode)) {
+      setScore([...score, cardCode]);
+      setHighestScore((prevScore) =>
+        score.length > prevScore ? score.length : prevScore,
+      );
+    } else setScore([]);
     setCards(shuffle(cards));
   };
 

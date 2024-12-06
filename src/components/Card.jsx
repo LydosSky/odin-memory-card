@@ -5,13 +5,12 @@ export default function Card({ card, clickHandler }) {
     <div
       className="card"
       style={{
-        backgroundImage: `url(${card.images.png})`,
-        background: '#555fff',
+        background: `url(${card.images.png})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      onClick={clickHandler}
+      onClick={() => clickHandler(card.code)}
     ></div>
   );
 }

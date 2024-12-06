@@ -13,43 +13,47 @@ import './styles/app.css';
  * */
 function App() {
   const URI = 'https://deckofcardsapi.com/api/deck/';
-  const [decks, setDecks] = useState(data.deck_id);
+  const [decks, setDecks] = useState(null);
   const [numberOfCards, setNumberOfCards] = useState(12);
-  const [cards, setCards] = useState(data.cards.slice(0, 12));
+  const [cards, setCards] = useState(null);
   const [score, setScore] = useState([]);
   const [highestScore, setHighestScore] = useState(0);
 
-  // useEffect(function () {
-  //   fetcher(`${URI}/new/shuffle/?deck_count=1`).then((deck) => setDecks(deck));
-  // }, []);
+  useEffect(function () {
+    fetcher(`${URI}/new/shuffle/?deck_count=1`).then((deck) => setDecks(deck));
+  }, []);
 
-  // useEffect(
-  //   function () {
-  //     fetcher(`${URI}/${decks.deck_id}/draw/?count=${numberOfCards}`).then(
-  //       (cards) => setCards(cards),
-  //     );
-  //   },
-  //   [decks, numberOfCards],
-  // );
+  useEffect(
+    function () {
+      if (decks !== null) {
+        fetcher(`${URI}/${decks.deck_id}/draw/?count=${numberOfCards}`).then(
+          (deck) => setCards(deck.cards),
+        );
+      }
+    },
+    [decks, numberOfCards],
+  );
 
   return (
-    <>
-      <div className="main-container">
-        <GameDisplay
-          score={score}
-          highestScore={highestScore}
-          numberOfCards={numberOfCards}
-          setNumberOfCards={setNumberOfCards}
-        />
+    <div className="main-container">
+      <GameDisplay
+        score={score}
+        highestScore={highestScore}
+        numberOfCards={numberOfCards}
+        setNumberOfCards={setNumberOfCards}
+      />
+      {cards !== null && (
         <Cards
           score={score}
           setScore={setScore}
+          setHighestScore={setHighestScore}
           cards={cards}
           setCards={setCards}
           numberOfCards={numberOfCards}
         />
-      </div>
-    </>
+      )}
+      )
+    </div>
   );
 }
 
